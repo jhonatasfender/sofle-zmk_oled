@@ -6,6 +6,17 @@ zephyr/
 zmk/
 modules/
 
+# Python virtualenvs e artefatos locais
+.env/
+.venv/
+env/
+zmk-venv/
+**/pyvenv.cfg
+**/lib64/
+
+# Scripts locais não versionados
+scripts/flash_sofle.sh
+
 # Logs, caches, editor files
 *.log
 .cache/
