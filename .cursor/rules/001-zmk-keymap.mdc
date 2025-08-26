@@ -1,0 +1,64 @@
+---
+description: ZMK keymap rule - validate edits to config/sofle.keymap against official docs
+globs:
+  - config/sofle.keymap
+alwaysApply: true
+---
+
+## ZMK Keymap — Regras para editar `config/sofle.keymap`
+
+Antes de propor, ajustar ou editar este arquivo, siga obrigatoriamente:
+
+- Consulte a documentação oficial do ZMK:
+  - Keymaps: https://zmk.dev/docs/keymaps
+  - Behaviors: https://zmk.dev/docs/keymaps/behaviors
+  - Se aplicável, recursos de split e ZMK Studio.
+- Valide:
+  - Sintaxe de bindings, layers, behaviors e condicionais.
+  - Diferenças de metade central vs. periférica para teclados split.
+  - Boas práticas do Studio (preferir snippets no build ao invés de flags globais).
+- Considere o layout do SO (ex.: ABNT2) e dead-keys; evite mapear caracteres acentuados diretamente quando o SO já provê.
+- Em todas as respostas/edits envolvendo este arquivo, cite explicitamente os links consultados. Em caso de conflito, priorize a doc oficial do ZMK.
+
+### Notas adicionais
+- Atuar de forma incremental e coerente com o estado real do projeto.
+- Apresentar alternativas e contrapontos quando houver incerteza, com as referências utilizadas.
+
+### Links úteis (oficiais)
+- Studio: https://zmk.dev/docs/features/studio
+- Split Keyboards (overview): https://zmk.dev/docs/advanced
+- Bluetooth & Bonding: https://zmk.dev/docs/features/bluetooth
+- Keymaps (overview): https://zmk.dev/docs/keymaps
+- List of Keycodes: https://zmk.dev/docs/keymaps/list-of-keycodes
+- Modifiers: https://zmk.dev/docs/keymaps/modifiers
+- Combos: https://zmk.dev/docs/keymaps/combos
+- Conditional Layers: https://zmk.dev/docs/keymaps/conditional-layers
+- Input Processors (overview): https://zmk.dev/docs/keymaps/input-processors
+  - Usage: https://zmk.dev/docs/keymaps/input-processors/usage
+  - Scaler: https://zmk.dev/docs/keymaps/input-processors/scaler
+  - Transformer: https://zmk.dev/docs/keymaps/input-processors/transformer
+  - Code Mapper: https://zmk.dev/docs/keymaps/input-processors/code-mapper
+  - Temp Layer: https://zmk.dev/docs/keymaps/input-processors/temp-layer
+- Behaviors (overview): https://zmk.dev/docs/keymaps/behaviors
+  - Key Press: https://zmk.dev/docs/keymaps/behaviors/key-press
+  - Layers: https://zmk.dev/docs/keymaps/behaviors/layers
+  - Misc: https://zmk.dev/docs/keymaps/behaviors/misc
+  - Hold-Tap / Mod-Tap: https://zmk.dev/docs/keymaps/behaviors/hold-tap
+  - Mod-Morph: https://zmk.dev/docs/keymaps/behaviors/mod-morph
+  - Macros: https://zmk.dev/docs/keymaps/behaviors/macros
+  - Key Toggle: https://zmk.dev/docs/keymaps/behaviors/key-toggle
+  - Sticky Key: https://zmk.dev/docs/keymaps/behaviors/sticky-key
+  - Sticky Layer: https://zmk.dev/docs/keymaps/behaviors/sticky-layer
+  - Tap Dance: https://zmk.dev/docs/keymaps/behaviors/tap-dance
+  - Caps Word: https://zmk.dev/docs/keymaps/behaviors/caps-word
+  - Key Repeat: https://zmk.dev/docs/keymaps/behaviors/key-repeat
+  - Sensor Rotate: https://zmk.dev/docs/keymaps/behaviors/sensor-rotate
+  - Mouse Emulation: https://zmk.dev/docs/keymaps/behaviors/mouse-emulation
+  - Reset: https://zmk.dev/docs/keymaps/behaviors/reset
+  - Bluetooth: https://zmk.dev/docs/keymaps/behaviors/bluetooth
+  - Outputs: https://zmk.dev/docs/keymaps/behaviors/outputs
+  - Underglow: https://zmk.dev/docs/keymaps/behaviors/underglow
+  - Backlight: https://zmk.dev/docs/keymaps/behaviors/backlight
+  - Power: https://zmk.dev/docs/keymaps/behaviors/power
+  - Soft Off: https://zmk.dev/docs/keymaps/behaviors/soft-off
+  - Studio Unlock: https://zmk.dev/docs/keymaps/behaviors/studio-unlock

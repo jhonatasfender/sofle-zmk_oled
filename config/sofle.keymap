@@ -89,7 +89,7 @@
 
             bindings = <
 &bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &kp SQT    &kp GRAVE &kp TILDE &kp CARET  &trans   &trans
-&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                          &kp PG_UP  &trans    &kp UP    &trans     &kp N0   &trans
+&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                          &kp PG_UP  &trans    &kp UP    &trans     &kp N0   &kp DQT
 &trans      &kp LALT      &kp LCTRL     &kp LSHFT     &trans        &kp CLCK                        &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp DEL  &kp BSPC
 &trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans        &trans    &trans  &trans     &trans    &trans    &trans     &trans   &trans
                           &mo L4        &mo L5        &mo L6        &mo L7        &trans    &trans  &trans     &trans    &trans    &trans
