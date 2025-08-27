@@ -85,3 +85,24 @@ Basta copiar o arquivo LEFT para o teclado esquerdo e copiar o arquivo RIGHT no 
 Nunca é preciso apagar nenhum arquivo dentro do Nicenano ( ou outra MCU ), sempre que atualizar só é necessário jogar um arquivo novo.
 
 | É comum que apareça um erro após após passar o novo firmware pra o teclado. Fiquem tranquilos não é um bug, é um feature do zmk : )
+
+## OLED / Display troubleshooting
+
+- Habilite o display no build:
+  - Em `config/sofle.conf`:
+    - `CONFIG_ZMK_DISPLAY=y`
+    - `CONFIG_ZMK_STUDIO=n` (evita erro de protobuf e garante build local)
+  - Rebuild local com overlay Kconfig:
+    - Left: `west build -d build/left -b nice_nano_v2 -- -DSHIELD=sofle_left -DOVERLAY_CONFIG=/home/jonatas/projects/github/sofle-zmk_oled/config/sofle.conf`
+    - Right: `west build -d build/right -b nice_nano_v2 -- -DSHIELD=sofle_right -DOVERLAY_CONFIG=/home/jonatas/projects/github/sofle-zmk_oled/config/sofle.conf`
+- Flash usando os UF2 locais:
+  - `scripts/flash_sofle.sh both`
+  - Se aparecer "No space left on device": remonte o NICENANO (desconectar/reconectar, 2x RST) e flasheie a metade individual (`left` ou `right`).
+- Energia externa (EXT POWER):
+  - Há um atalho no layer ADJUST (`LOWER+RAISE`) para alternar energia externa (`&ext_power EP_TOG`). Se o OLED apagar, ative novamente.
+- Endereço I2C do OLED:
+  - O shield Sofle assume `ssd1306@3c`. Se o seu módulo for `0x3D`, será necessário um overlay para ajustar `reg = <0x3d>;`.
+
+Referências:
+- Displays (ZMK): https://zmk.dev/docs/features/displays
+- Power / Ext Power (ZMK): https://zmk.dev/docs/keymaps/behaviors/power

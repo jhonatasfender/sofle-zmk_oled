@@ -24,6 +24,12 @@ Antes de propor, ajustar ou editar este arquivo, siga obrigatoriamente:
 - Atuar de forma incremental e coerente com o estado real do projeto.
 - Apresentar alternativas e contrapontos quando houver incerteza, com as referências utilizadas.
 
+### Regra específica deste repo (OLED/Display e build/flash)
+- Ao debugar display OLED apagado: garantir build com `CONFIG_ZMK_DISPLAY=y` e, neste projeto, desabilitar Studio `CONFIG_ZMK_STUDIO=n` via `config/sofle.conf`.
+- Build local dos dois halves com overlay Kconfig: usar `-DOVERLAY_CONFIG=/home/jonatas/projects/github/sofle-zmk_oled/config/sofle.conf`.
+- Flash: usar os UF2 locais `build/left/zephyr/zmk.uf2` e `build/right/zephyr/zmk.uf2` com `scripts/flash_sofle.sh`.
+- Se o NICENANO acusar “No space left on device”, remonte (desconectar/reconectar, 2x RST) e flasheie apenas a metade necessária.
+
 ### Links úteis (oficiais)
 - Studio: https://zmk.dev/docs/features/studio
 - Split Keyboards (overview): https://zmk.dev/docs/advanced
