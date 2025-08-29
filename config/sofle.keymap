@@ -10,6 +10,15 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/rgb.h>
 
+// Unicode helpers (zmk-helpers): https://github.com/urob/zmk-helpers#zmk_unicode
+// Include AFTER behaviors.dtsi per upstream guidance
+#define HOST_OS 1
+#define OS_UNICODE_TRAIL &macro_tap &kp RET
+// Make Linux Unicode prefix explicit press/release (no commas inside <...>)
+#define OS_UNICODE_LEAD &macro_press &kp LCTRL &macro_press &kp LSHFT &macro_tap &kp U &macro_release &kp LSHFT &macro_release &kp LCTRL
+#include "zmk-helpers/helper.h"
+#include "zmk-helpers/unicode-chars/portuguese.dtsi"
+
 #define BASE 0
 #define LOWER 1
 #define RAISE 2
@@ -49,7 +58,7 @@
 &kp ESC    &kp Q   &kp W     &kp E     &kp R      &kp T                               &kp Y      &kp U      &kp I      &kp O     &kp P     &kp BSPC
 &kp TAB    &kp A   &kp S     &kp D     &kp F      &kp G                               &kp H      &kp J      &kp K      &kp L     &kp SEMI  &kp SQT
 &kp LSHFT  &kp Z   &kp X     &kp C     &kp V      &kp B      &kp C_MUTE    &none      &kp N      &kp M      &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-                   &kp LGUI  &kp LALT  &kp LCTRL  &lt LOWER RET  &kp RET       &kp SPACE  &tog RAISE      &kp RCTRL  &kp RALT   &kp RGUI
+                   &kp LGUI  &kp LALT  &kp LCTRL  &lt LOWER RET  &kp RET       &kp SPACE  &mo RAISE       &kp RCTRL  &kp RALT   &kp RGUI
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -88,8 +97,8 @@
             //                |  L4  |  L5   |  L6   |  L7  |      |  |      |      |      |       |      |
 
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &kp SQT    &kp GRAVE &kp TILDE &kp CARET  &trans   &trans
-&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                          &kp PG_UP  &trans    &kp UP    &trans     &kp N0   &kp DQT
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &kp SQT    &kp GRAVE &kp TILDE &kp CARET  &none    &none
+&trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                          &kp PG_UP  &pt_e_acute   &kp UP    &none      &kp N0   &kp DQT
 &trans      &kp LALT      &kp LCTRL     &kp LSHFT     &trans        &kp CLCK                        &kp PG_DN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp DEL  &kp BSPC
 &trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans        &trans    &trans  &trans     &trans    &trans    &trans     &trans   &trans
                           &mo L4        &mo L5        &mo L6        &mo L7        &trans    &trans  &trans     &trans    &trans    &trans
