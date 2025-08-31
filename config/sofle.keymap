@@ -130,12 +130,12 @@
         };
 
         layer_4 {
-            display-name = "pt";
             bindings = <
-&trans  &trans          &trans          &pt_e_acute   &trans       &trans                            &trans        &pt_u_acute    &pt_i_acute    &pt_oa         &trans       &trans
-&trans  &pt_aa          &trans          &trans        &trans       &trans                            &trans        &trans         &trans         &trans         &trans       &trans
-&trans  &trans          &trans          &pt_c_cedilla &trans       &trans        &trans    &trans  &trans        &trans         &pt_a_tilde    &pt_o_tilde   &trans       &trans
-                &trans  &trans          &trans        &trans        &trans        &trans    &trans  &trans        &trans         &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
             >;
         };
 
