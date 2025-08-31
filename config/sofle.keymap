@@ -32,6 +32,12 @@
 #define L6 6
 #define L7 7
 
+// Additional Portuguese Unicode pairs (for OS in English): í/Í, ú/Ú, õ/Õ
+// See zmk-helpers Unicode docs: https://github.com/urob/zmk-helpers#zmk_unicode
+ZMK_UNICODE_PAIR(pt_i_acute, N0, N0, E, D,   N0, N0, C, D)
+ZMK_UNICODE_PAIR(pt_u_acute, N0, N0, F, A,   N0, N0, D, A)
+ZMK_UNICODE_PAIR(pt_o_tilde, N0, N0, F, N5,  N0, N0, D, N5)
+
 / {
     // Activate ADJUST layer by pressing raise and lower
 
@@ -130,12 +136,12 @@
         };
 
         layer_4 {
+            display-name = "pt";
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans
+&trans  &trans          &trans          &pt_e_acute   &trans       &trans                            &trans        &pt_u_acute    &pt_i_acute    &pt_oa         &trans       &trans
+&trans  &pt_aa          &trans          &trans        &trans       &trans                            &trans        &trans         &trans         &trans         &trans       &trans
+&trans  &trans          &trans          &pt_c_cedilla &trans       &trans        &trans    &trans  &trans        &trans         &pt_a_tilde    &pt_o_tilde   &trans       &trans
+                &trans  &trans          &trans        &trans        &trans        &trans    &trans  &trans        &trans         &trans
             >;
         };
 
