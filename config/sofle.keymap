@@ -32,10 +32,6 @@
 #define L6 6
 #define L7 7
 
-// Additional Portuguese Unicode pairs are declared in a separate include
-// to keep Keymap Editor parsing happy.
-#include "unicode_pt_extra.dtsi"
-
 / {
     // Activate ADJUST layer by pressing raise and lower
 
