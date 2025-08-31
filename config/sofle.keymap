@@ -32,11 +32,9 @@
 #define L6 6
 #define L7 7
 
-// Additional Portuguese Unicode pairs (for OS in English): í/Í, ú/Ú, õ/Õ
-// See zmk-helpers Unicode docs: https://github.com/urob/zmk-helpers#zmk_unicode
-ZMK_UNICODE_PAIR(pt_i_acute, N0, N0, E, D,   N0, N0, C, D)
-ZMK_UNICODE_PAIR(pt_u_acute, N0, N0, F, A,   N0, N0, D, A)
-ZMK_UNICODE_PAIR(pt_o_tilde, N0, N0, F, N5,  N0, N0, D, N5)
+// Additional Portuguese Unicode pairs are declared in a separate include
+// to keep Keymap Editor parsing happy.
+#include "unicode_pt_extra.dtsi"
 
 / {
     // Activate ADJUST layer by pressing raise and lower

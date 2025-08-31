@@ -1,0 +1,8 @@
+// Extra Portuguese Unicode pairs for use with HOST_OS=1 (Linux Ctrl+Shift+U)
+// Reference: https://github.com/urob/zmk-helpers#zmk_unicode
+
+ZMK_UNICODE_PAIR(pt_i_acute, N0, N0, E, D,   N0, N0, C, D)  // í/Í
+ZMK_UNICODE_PAIR(pt_u_acute, N0, N0, F, A,   N0, N0, D, A)  // ú/Ú
+ZMK_UNICODE_PAIR(pt_o_tilde, N0, N0, F, N5,  N0, N0, D, N5) // õ/Õ
+
+
