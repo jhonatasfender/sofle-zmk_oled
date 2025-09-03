@@ -17,7 +17,9 @@
 #include "zmk-helpers/helper.h"
 #include "zmk-helpers/unicode-chars/portuguese.dtsi"
 
-// ZMK unicode helpers for ASCII symbols that differ on ABNT2 when using US-physical boards
+// ZMK Unicode helpers for ASCII symbols that differ on ABNT2 when using US-physical boards.
+// These send Unicode code points via OS_UNICODE_LEAD/TRAIL (Linux Ctrl+Shift+U ... Enter)
+// to make '/', '\\', '|' and '?' consistent regardless of the host OS layout.
 ZMK_UNICODE_SINGLE(uc_qmark, N0, N0, N3, F)   // U+003F '?'
 ZMK_UNICODE_SINGLE(uc_pipe,  N0, N0, N7, C)   // U+007C '|'
 ZMK_UNICODE_SINGLE(uc_fslash, N0, N0, N2, F)  // U+002F '/'
@@ -54,8 +56,9 @@ ZMK_UNICODE_SINGLE(uc_bslash, N0, N0, N5, C)  // U+005C '\\'
             // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |       |
             // |  ESC  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U    |  I    |  O   |   P   | BKSPC |
             // |  TAB  |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
-            // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  MUTE  |  |       |  N   |  M    |  ,    |  .   |   /   | SHIFT |
+            // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  MUTE  |  |       |  N   |  M    |  ,    |  .   |  /(U) | SHIFT |
             //               | GUI | ALT  | CTRL | LOWER|  ENTER |  | SPACE | RAISE| CTRL  | ALT   | GUI  |
+            // Note: /(U) uses Unicode (uc_fslash) for layout-independent '/'.
 
             bindings = <
 &kp GRAVE  &kp N1  &kp N2    &kp N3    &kp N4     &kp N5                                  &kp N6     &kp N7     &kp N8     &kp N9    &kp N0    &none
@@ -75,9 +78,10 @@ ZMK_UNICODE_SINGLE(uc_bslash, N0, N0, N5, C)  // U+005C '\\'
             // ------------------------------------------------------------------------------------------------------------
             // |       |  F1 |  F2 |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
             // |   `   |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |  F12  |
-            // |       |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |   |   |
-            // |       |  =  |  -  |  +   |  {   |  }   |        |  |       |  [   |  ]    |  ;    |  :   |   \   |       |
+            // |       |  !  |  @  |  #   |  $   |  %   |                   |  ^   |  &    |  *    |  (   |   )   |  |(U) |
+            // |       |  =  |  -  |  +   |  {   |  }   |        |  |       |  [   |  ]    |  ;    |  :   |  \(U) |       |
             //               |     |      |      |      |        |  |       |      |       |       |      |
+            // Note: |(U) and \(U) use Unicode (uc_pipe, uc_bslash).
 
             bindings = <
 &trans     &kp F1     &kp F2     &kp F3    &kp F4    &kp F5                       &kp F6            &kp F7             &kp F8     &kp F9     &kp F10   &kp F11
@@ -94,14 +98,15 @@ ZMK_UNICODE_SINGLE(uc_bslash, N0, N0, N5, C)  // U+005C '\\'
             display-name = "raise";
 
             // ------------------------------------------------------------------------------------------------------------
-            // | BTCLR | BT1  | BT2  |  BT3  |  BT4  |  BT5 |                |  '   |  `   |   ~   |   ^  |       |       |
-            // |       | INS  | PSCR | GUI   |       |      |                | PGUP |      |   ^   |      |       |       |
+            // | BTCLR | BT1  | BT2  |  BT3  |  BT4  |  BT5 |                |  '   |  `   |   ~   |   ^  | HOME  |  END  |
+            // |       | INS  | PSCR | GUI   |       |      |                | PGUP |  ?(U)|   ^   |      |       |       |
             // |       | ALT  | CTRL | SHIFT |       | CAPS |                | PGDN |   <- |   v   |  ->  |  DEL  | BKSPC |
             // |       | UNDO | CUT  | COPY  | PASTE |      |      |  |      |      |      |       |      |       |       |
             //                |  L4  |  L5   |  L6   |  L7  |      |  |      |      |      |       |      |
+            // Note: ?(U) uses Unicode (uc_qmark).
 
             bindings = <
-&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &kp SQT    &kp GRAVE  &kp TILDE  &kp CARET  &none    &none
+&bt BT_CLR  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                    &kp SQT    &kp GRAVE  &kp TILDE  &kp CARET  &kp HOME &kp END
 &trans      &kp INS       &kp PSCRN     &kp K_CMENU   &trans        &trans                          &kp PG_UP  &uc_qmark  &kp UP     &none      &kp N0   &kp DQT
 &trans      &kp LALT      &kp LCTRL     &kp LSHFT     &trans        &kp CLCK                        &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT  &kp DEL  &kp BSPC
 &trans      &kp K_UNDO    &kp K_CUT     &kp K_COPY    &kp K_PASTE   &trans        &trans    &trans  &trans     &trans     &trans     &trans     &trans   &trans
