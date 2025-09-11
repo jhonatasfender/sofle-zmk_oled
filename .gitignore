@@ -1,0 +1,40 @@
+# Zephyr/West workdir and build artifacts
+.west/
+build/
+modules/
+zephyr/
+zephyr2/
+bootloader/
+tools/
+
+# Optional vendor sources pulled locally
+zmk/
+
+# Zephyr common outputs
+outdir/
+outdir-*/
+twister-out*/
+sanity-out*/
+bsim_out/
+bsim_bt_out/
+
+# OS/IDE cruft
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+*.log
+
+# Python
+__pycache__/
+.venv/
+.python-version
+
+# clangd cache
+app/.cache/
+.clangd
+
