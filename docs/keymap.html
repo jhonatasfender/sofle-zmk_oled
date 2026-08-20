@@ -1,0 +1,340 @@
+<title>Mapa do Sofle ABNT2</title>
+<style>
+  :root{
+    --bg:#f4f1ea;
+    --panel:#fffdf8;
+    --ink:#1c1a17;
+    --muted:#6f675c;
+    --line:#ddd6c9;
+    --accent:#9a5b2d;
+    --accent-soft:#f2e3d3;
+    --k-base:#fffdf8;
+    --k-mod:#e9e2d4;
+    --k-layer:#f6dcc0;
+    --k-trans:#f6f4ef;
+    --k-none:#eceae3;
+    --k-sys:#dde8e4;
+    --shadow:0 1px 0 #cfc7b8;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:ui-sans-serif,system-ui,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#15140f;
+      --panel:#1e1d16;
+      --ink:#ece7dc;
+      --muted:#9a9284;
+      --line:#333026;
+      --accent:#e0a06a;
+      --accent-soft:#3a2b1c;
+      --k-base:#26241b;
+      --k-mod:#302d23;
+      --k-layer:#4a3520;
+      --k-trans:#1f1e17;
+      --k-none:#1b1a14;
+      --k-sys:#22302c;
+      --shadow:0 1px 0 #0c0b08;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15140f;
+    --panel:#1e1d16;
+    --ink:#ece7dc;
+    --muted:#9a9284;
+    --line:#333026;
+    --accent:#e0a06a;
+    --accent-soft:#3a2b1c;
+    --k-base:#26241b;
+    --k-mod:#302d23;
+    --k-layer:#4a3520;
+    --k-trans:#1f1e17;
+    --k-none:#1b1a14;
+    --k-sys:#22302c;
+    --shadow:0 1px 0 #0c0b08;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:var(--sans); line-height:1.5;
+    margin:0; padding:2rem 1.25rem 4rem;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  header{border-bottom:1px solid var(--line);padding-bottom:1.25rem;margin-bottom:1.75rem}
+  h1{font-size:1.6rem;margin:0 0 .35rem;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:.92rem;margin:0}
+  .sub code{font-family:var(--mono);font-size:.86em}
+
+  nav{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 1.25rem}
+  nav button{
+    font:inherit;font-size:.9rem;cursor:pointer;
+    background:var(--panel);color:var(--ink);
+    border:1px solid var(--line);border-radius:999px;
+    padding:.42rem 1rem;transition:background .12s,border-color .12s;
+  }
+  nav button:hover{border-color:var(--accent)}
+  nav button[aria-selected="true"]{
+    background:var(--accent-soft);border-color:var(--accent);
+    color:var(--ink);font-weight:600;
+  }
+
+  .layer{display:none}
+  .layer.active{display:block}
+
+  .howto{
+    background:var(--panel);border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:6px;padding:.85rem 1.1rem;margin-bottom:1.5rem;
+    font-size:.92rem;
+  }
+  .howto strong{color:var(--accent)}
+
+  .board{overflow-x:auto;padding-bottom:.5rem}
+  .board-inner{min-width:900px}
+  .row{display:flex;gap:.4rem;margin-bottom:.4rem;justify-content:center;align-items:flex-end}
+  .half{display:flex;gap:.4rem}
+  .gap{width:3.2rem;flex:none}
+
+  .key{
+    width:4.15rem;height:3.5rem;flex:none;
+    background:var(--k-base);color:var(--ink);
+    border:1px solid var(--line);border-radius:6px;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    padding:.2rem;text-align:center;
+    font-size:.86rem;line-height:1.15;
+    overflow:hidden;
+  }
+  .key .shift{
+    font-size:.7rem;color:var(--muted);
+    display:block;margin-bottom:.12rem;
+  }
+  .key .main{font-weight:600;word-break:break-word}
+  .key .code{
+    font-family:var(--mono);font-size:.6rem;
+    color:var(--muted);margin-top:.15rem;
+  }
+  .key.mod{background:var(--k-mod)}
+  .key.layer{background:var(--k-layer)}
+  .key.sys{background:var(--k-sys)}
+  .key.trans{background:var(--k-trans);color:var(--muted);font-weight:400}
+  .key.none{background:var(--k-none);color:var(--muted);opacity:.55}
+  .key.wide{width:5.4rem}
+
+  .thumbs{margin-top:.7rem}
+
+  .legend{
+    display:flex;flex-wrap:wrap;gap:1.1rem;
+    margin:1.5rem 0 0;padding-top:1.1rem;
+    border-top:1px solid var(--line);
+    font-size:.85rem;color:var(--muted);
+  }
+  .legend span{display:flex;align-items:center;gap:.4rem}
+  .sw{width:.85rem;height:.85rem;border-radius:3px;border:1px solid var(--line);display:inline-block}
+
+  .notes{margin-top:2.5rem;border-top:1px solid var(--line);padding-top:1.5rem}
+  .notes h2{font-size:1.05rem;margin:0 0 .8rem}
+  .notes table{border-collapse:collapse;width:100%;font-size:.88rem}
+  .notes th,.notes td{
+    text-align:left;padding:.45rem .7rem;
+    border-bottom:1px solid var(--line);
+  }
+  .notes th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+  .notes code{font-family:var(--mono);font-size:.85em;background:var(--panel);padding:.1rem .35rem;border-radius:3px;border:1px solid var(--line)}
+  .notes p{font-size:.9rem;color:var(--muted)}
+
+  .enc{
+    margin-top:1.1rem;font-size:.88rem;color:var(--muted);
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:6px;padding:.7rem 1rem;
+  }
+  .enc b{color:var(--ink)}
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Mapa de teclas &mdash; Sofle / ZMK / ABNT2</h1>
+  <p class="sub">Gerado a partir de <code>config/sofle.keymap</code>. As legendas mostram o que <em>sai na tela</em> com o layout ABNT2 (X11 <code>br</code>, pc105), n&atilde;o o nome do keycode do ZMK.</p>
+</header>
+
+<nav id="tabs"></nav>
+<div id="layers"></div>
+
+<div class="legend">
+  <span><i class="sw" style="background:var(--k-base)"></i> tecla normal</span>
+  <span><i class="sw" style="background:var(--k-mod)"></i> modificador</span>
+  <span><i class="sw" style="background:var(--k-layer)"></i> camada</span>
+  <span><i class="sw" style="background:var(--k-sys)"></i> sistema (BT / RGB / energia)</span>
+  <span><i class="sw" style="background:var(--k-trans)"></i> transparente &mdash; cai na camada de baixo</span>
+  <span><i class="sw" style="background:var(--k-none)"></i> sem fun&ccedil;&atilde;o</span>
+</div>
+
+<div class="notes">
+  <h2>Equival&ecirc;ncias ABNT2 que valem lembrar ao editar o keymap</h2>
+  <p>O ZMK envia scancode, n&atilde;o caractere: cada <code>&amp;kp</code> passa pela tabela do ABNT2 antes de virar texto. Por isso o nome do keycode quase nunca &eacute; o que aparece.</p>
+  <table>
+    <tr><th>Keycode ZMK</th><th>Sai no ABNT2</th></tr>
+    <tr><td><code>GRAVE</code></td><td>' &nbsp;(Shift: &quot;)</td></tr>
+    <tr><td><code>LBKT</code></td><td>&acute; agudo &nbsp;(Shift: ` crase)</td></tr>
+    <tr><td><code>SEMI</code></td><td>&ccedil;</td></tr>
+    <tr><td><code>SQT</code></td><td>~ til &nbsp;(Shift: ^ circunflexo)</td></tr>
+    <tr><td><code>FSLH</code></td><td>; &nbsp;(Shift: :)</td></tr>
+    <tr><td><code>INT1</code></td><td>/ &nbsp;(Shift: ?) &mdash; tecla extra do ABNT2</td></tr>
+    <tr><td><code>NON_US_BSLH</code></td><td>\ &nbsp;(Shift: |) &mdash; tecla extra do ABNT2</td></tr>
+    <tr><td><code>RBKT</code></td><td>[ &nbsp;(Shift: {)</td></tr>
+    <tr><td><code>BSLH</code></td><td>] &nbsp;(Shift: })</td></tr>
+    <tr><td><code>KP_*</code></td><td>numpad &mdash; n&atilde;o passa pela tabela do layout</td></tr>
+  </table>
+  <p><code>INT1</code> e <code>NON_US_BSLH</code> n&atilde;o existem no ANSI: s&atilde;o as teclas extras do teclado de 105 teclas. Sem elas, <code>/ ? \ |</code> ficariam inalcan&ccedil;&aacute;veis no Sofle.</p>
+</div>
+</div>
+
+<script>
+// t: tipo da tecla -> classe CSS. b=base, m=modificador, l=camada, s=sistema, x=trans, n=none
+const K = (main, opts = {}) => ({ main, ...opts });
+const T = K('&#9663;', { t: 'x', title: 'transparente' });
+const N = K('&mdash;', { t: 'n' });
+
+const LAYERS = [
+  {
+    id: 'base',
+    name: 'BASE',
+    howto: 'Camada padr&atilde;o. &Eacute; onde voc&ecirc; est&aacute; quando n&atilde;o segura nada.',
+    rows: [
+      [ K("'", {sh:'"', c:'GRAVE'}), K('1',{sh:'!'}), K('2',{sh:'@'}), K('3',{sh:'#'}), K('4',{sh:'$'}), K('5',{sh:'%'}),
+        K('6',{sh:'&uml;'}), K('7',{sh:'&amp;'}), K('8',{sh:'*'}), K('9',{sh:'('}), K('0',{sh:')'}), K('&acute;',{sh:'`',c:'LBKT'}) ],
+      [ K('Esc',{t:'m'}), K('Q'), K('W'), K('E'), K('R'), K('T'),
+        K('Y'), K('U'), K('I'), K('O'), K('P'), K('Backspace',{t:'m'}) ],
+      [ K('Tab',{t:'m'}), K('A'), K('S'), K('D'), K('F'), K('G'),
+        K('H'), K('J'), K('K'), K('L'), K('&Ccedil;',{c:'SEMI'}), K('~',{sh:'^',c:'SQT'}) ],
+      [ K('Shift',{t:'m'}), K('Z'), K('X'), K('C'), K('V'), K('B'),
+        K('N'), K('M'), K(','), K('.'), K(';',{sh:':',c:'FSLH'}), K('Shift',{t:'m'}) ],
+    ],
+    mid: [ K('Mute',{t:'s'}), N ],
+    thumbs: [
+      [ K('GUI',{t:'m'}), K('Alt',{t:'m'}), K('Ctrl',{t:'m'}), K('LOWER',{t:'l'}), K('Enter',{t:'m'}) ],
+      [ K('Space',{t:'m'}), K('RAISE',{t:'l'}), K('Ctrl',{t:'m'}), K('Alt',{t:'m'}), K('GUI',{t:'m'}) ],
+    ],
+  },
+  {
+    id: 'lower',
+    name: 'LOWER',
+    howto: 'Segure <strong>LOWER</strong> (polegar esquerdo). Fun&ccedil;&atilde;o, s&iacute;mbolos e pontua&ccedil;&atilde;o.',
+    howtoNote: '<code>&amp; ^ ( )</code> n&atilde;o aparecem aqui: no ABNT2 eles saem com Shift na fileira de n&uacute;meros da BASE, igual num teclado de 105 teclas. O circunflexo &eacute; Shift + til.',
+    rows: [
+      [ T, K('F1'), K('F2'), K('F3'), K('F4'), K('F5'),
+        K('F6'), K('F7'), K('F8'), K('F9'), K('F10'), K('F11') ],
+      [ K("'",{sh:'"',c:'GRAVE'}), K('1'), K('2'), K('3'), K('4'), K('5'),
+        K('[',{c:'RBKT'}), K(']',{c:'BSLH'}), K('{',{c:'RBRC'}), K('}',{c:'PIPE'}), K('\\',{c:'NON_US_BSLH'}), K('F12') ],
+      [ T, K('!'), K('@'), K('#'), K('$'), K('%'),
+        K('/',{c:'INT1'}), K('?',{c:'LS(INT1)'}), K(';',{c:'FSLH'}), K(':',{c:'QMARK'}), K('&acute;',{c:'LBKT'}), K('`',{c:'LBRC'}) ],
+      [ T, K('='), K('-'), K('+'), K('_'), K('*'),
+        K('|',{c:'PIPE2'}), K("'",{c:'GRAVE'}), K('"',{c:'LS(GRAVE)'}), T, T, T ],
+    ],
+    mid: [ T, T ],
+    thumbs: [ [T,T,T,T,T], [T,T,T,T,T] ],
+  },
+  {
+    id: 'raise',
+    name: 'RAISE',
+    howto: 'Segure <strong>RAISE</strong> (polegar direito). Navega&ccedil;&atilde;o, edi&ccedil;&atilde;o, m&iacute;dia e Bluetooth.',
+    rows: [
+      [ K('BT CLR',{t:'s'}), K('BT 1',{t:'s'}), K('BT 2',{t:'s'}), K('BT 3',{t:'s'}), K('BT 4',{t:'s'}), K('BT 5',{t:'s'}),
+        T, T, T, T, T, K('NUM',{t:'l',c:'tog NUM'}) ],
+      [ T, K('Insert'), K('PrtSc'), K('Menu',{c:'K_CMENU'}), T, T,
+        K('PgUp'), K('Home'), K('&uarr;'), K('End'), K('PrtSc'), T ],
+      [ T, K('Alt',{t:'m'}), K('Ctrl',{t:'m'}), K('Shift',{t:'m'}), T, K('CapsLk',{t:'m'}),
+        K('PgDn'), K('&larr;'), K('&darr;'), K('&rarr;'), K('Delete'), K('Backspace') ],
+      [ T, K('Undo'), K('Cut'), K('Copy'), K('Paste'), T,
+        K('&#9198;',{t:'s',c:'C_PREV'}), K('&#9199;',{t:'s',c:'C_PLAY_PAUSE'}), K('&#9197;',{t:'s',c:'C_NEXT'}), T, T, T ],
+    ],
+    mid: [ T, T ],
+    thumbs: [ [T,T,T,T,T], [T,T,T,T,T] ],
+    shifted: true,
+  },
+  {
+    id: 'num',
+    name: 'NUM',
+    howto: 'Trava/destrava com <strong>RAISE + NUM</strong> (canto superior direito da camada RAISE). Numpad na m&atilde;o direita; o resto fica transparente para n&atilde;o conflitar.',
+    howtoNote: 'Os operadores usam os keycodes do teclado num&eacute;rico (<code>KP_*</code>), que n&atilde;o passam pela tabela do layout: <code>&amp;kp FSLH</code> daria <code>;</code> no ABNT2, enquanto <code>&amp;kp KP_DIVIDE</code> d&aacute; <code>/</code>.',
+    rows: [
+      [ T,T,T,T,T,T,  T,T,T,T,T,T ],
+      [ T,T,T,T,T,T,  T, K('7'), K('8'), K('9'), K('/',{c:'KP_DIVIDE'}), K('Backspace') ],
+      [ T,T,T,T,T,T,  T, K('4'), K('5'), K('6'), K('*',{c:'KP_MULTIPLY'}), K('-',{c:'KP_MINUS'}) ],
+      [ T,T,T,T,T,T,  T, K('1'), K('2'), K('3'), K('+',{c:'KP_PLUS'}), T ],
+    ],
+    mid: [ T, T ],
+    thumbs: [ [T,T,T,T,T], [T,T,T,T,T] ],
+  },
+  {
+    id: 'adjust',
+    name: 'ADJUST',
+    howto: 'Segure <strong>LOWER + RAISE</strong> juntos. Camada condicional: RGB, energia externa e Bluetooth.',
+    howtoNote: 'A tecla <code>EXTPWR</code> liga/desliga o trilho de energia externa &mdash; que alimenta os LEDs e o OLED. Como <code>CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER=n</code>, o <code>RGB TOG</code> sozinho <em>n&atilde;o</em> liga esse trilho.',
+    rows: [
+      [ K('BT CLR',{t:'s'}), K('BT 1',{t:'s'}), K('BT 2',{t:'s'}), K('BT 3',{t:'s'}), K('BT 4',{t:'s'}), K('BT 5',{t:'s'}),
+        N,N,N,N,N,N ],
+      [ K('EXT PWR',{t:'s'}), K('Hue &minus;',{t:'s'}), K('Hue +',{t:'s'}), K('Sat &minus;',{t:'s'}), K('Sat +',{t:'s'}), K('Efeito',{t:'s'}),
+        N,N,N,N,N,N ],
+      [ N, K('Brilho &minus;',{t:'s'}), K('Brilho +',{t:'s'}), N,N,N,  N,N,N,N,N,N ],
+      [ N,N,N,N,N,N,  N,N,N,N,N,N ],
+    ],
+    mid: [ K('RGB TOG',{t:'s'}), N ],
+    thumbs: [ [N,N,N,N,N], [N,N,N,N,N] ],
+  },
+];
+
+const CLS = { m:'mod', l:'layer', s:'sys', x:'trans', n:'none' };
+
+function keyHTML(k){
+  const cls = ['key', CLS[k.t] || ''].filter(Boolean).join(' ');
+  const sh = k.sh ? `<span class="shift">${k.sh}</span>` : '';
+  const code = k.c ? `<span class="code">${k.c}</span>` : '';
+  const title = k.title ? ` title="${k.title}"` : '';
+  return `<div class="${cls}"${title}>${sh}<span class="main">${k.main}</span>${code}</div>`;
+}
+
+function rowHTML(row, mid){
+  const left = row.slice(0,6).map(keyHTML).join('');
+  const right = row.slice(6).map(keyHTML).join('');
+  const middle = mid
+    ? `<div class="half">${mid.map(keyHTML).join('')}</div>`
+    : '<div class="gap"></div>';
+  return `<div class="row"><div class="half">${left}</div>${middle}<div class="half">${right}</div></div>`;
+}
+
+function layerHTML(L){
+  const body = L.rows.map((r,i) => rowHTML(r, i === 3 ? L.mid : null)).join('');
+  const th = `<div class="row thumbs">
+      <div class="half">${L.thumbs[0].map(keyHTML).join('')}</div>
+      <div class="gap"></div>
+      <div class="half">${L.thumbs[1].map(keyHTML).join('')}</div>
+    </div>`;
+  const note = L.howtoNote ? `<p style="margin:.5rem 0 0">${L.howtoNote}</p>` : '';
+  return `<section class="layer" id="layer-${L.id}">
+      <div class="howto">${L.howto}${note}</div>
+      <div class="board"><div class="board-inner">${body}${th}</div></div>
+      <div class="enc"><b>Encoders:</b> esquerdo = volume (girar), Mute (apertar) &middot; direito = Page Up / Page Down (girar)</div>
+    </section>`;
+}
+
+const tabs = document.getElementById('tabs');
+const layers = document.getElementById('layers');
+layers.innerHTML = LAYERS.map(layerHTML).join('');
+tabs.innerHTML = LAYERS.map((L,i) =>
+  `<button role="tab" data-id="${L.id}" aria-selected="${i===0}">${L.name}</button>`).join('');
+
+function select(id){
+  document.querySelectorAll('#tabs button').forEach(b =>
+    b.setAttribute('aria-selected', String(b.dataset.id === id)));
+  document.querySelectorAll('.layer').forEach(s =>
+    s.classList.toggle('active', s.id === `layer-${id}`));
+}
+tabs.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (b) select(b.dataset.id);
+});
+select(LAYERS[0].id);
+</script>
