@@ -22,3 +22,14 @@ include:
     shield: sofle_left
   - board: nice_nano_v2
     shield: sofle_right
+  # Mesmos firmwares, porem com log por USB habilitado. Use apenas para
+  # diagnosticar o split: conecte a metade por cabo e leia a serial para ver
+  # desconexoes, fila cheia e renegociacao de parametros de conexao.
+  - board: nice_nano_v2
+    shield: sofle_left
+    cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
+    artifact-name: sofle_left_logging
+  - board: nice_nano_v2
+    shield: sofle_right
+    cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
+    artifact-name: sofle_right_logging
